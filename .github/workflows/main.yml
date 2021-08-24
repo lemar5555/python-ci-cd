@@ -1,1 +1,27 @@
+name: Python CI/CD
 
+on: [push]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v1
+      - name: Run hello.py
+        run: python hello.py
+  build:
+    name: Build
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v1
+      - name: Create an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Project Artifact
+          path: .
+        
+    
